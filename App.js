@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Image, TextInput, Picker, StyleSheet } from 'react-native';
+import { View, Image, TextInput, Picker, Button, Switch, Text, StyleSheet } from 'react-native';
 
 import Logo from './assets/logo.png';
+import Slider from '@react-native-community/slider';
+
 class App extends Component{
   constructor(props){
     super(props);
@@ -10,7 +12,9 @@ class App extends Component{
       gender: [
         {key:1, Sexo: "Masculino" },
         {key:2, Sexo: "Feminino" }
-      ]
+      ],
+      StatusEstudante: false,
+      valor: 0
     }
   }
   render(){
@@ -37,6 +41,20 @@ class App extends Component{
           >
             {genderItem}
           </Picker>
+ 
+				<Text>Você tem {this.state.valor.toFixed(0)} Kg</Text>
+          <Switch 
+            value={this.state.StatusEstudante}
+            onValueChange={ (valorSwitch) => this.setState({StatusEstudante: valorSwitch})}
+          />
+          	<Text style={styles.texto}>
+					    {(this.state.StatusEstudante) ? "Sou Estudante" : "Não Sou Estudante"}
+				    </Text>
+            
+            <View style={styles.entrar}>
+              <Button  title="Entrar" onPress={ () => this.entrar('Lucas')} />
+            </View>
+
         </View>
       </View>
     );
@@ -50,8 +68,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logo: {
-    width: 200,
-    height: 200
+    width: 130,
+    height: 130
   },
   input:{
     borderWidth: 1,
@@ -61,6 +79,9 @@ const styles = StyleSheet.create({
     width: 300,
     fontSize: 20,
     marginBottom: 10
+  },
+  entrar: {
+    marginTop: 50
   }
 });
 export default App;
